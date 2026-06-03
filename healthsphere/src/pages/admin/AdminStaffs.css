@@ -1,0 +1,512 @@
+.admin-staff-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  border: 1px solid;
+}
+
+.admin-staff-role-badge.doctor {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #1565c0;
+  border-color: #90caf9;
+}
+
+.admin-staff-role-badge.nurse {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+  border-color: #81c784;
+}
+
+.admin-staff-role-badge.admin {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe0b2 100%);
+  color: #f57f17;
+  border-color: #ffb74d;
+}
+
+/* Responsive visibility helpers */
+.hidden-small {
+  display: table-cell;
+}
+
+.hidden-medium {
+  display: table-cell;
+}
+
+@media (max-width: 640px) {
+  .hidden-small {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hidden-medium {
+    display: none;
+  }
+}
+
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Header with Add Button */
+.admin-staff-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: slideInDown 0.6s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .admin-staff-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.admin-staff-title-group h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.admin-staff-title-group p {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.admin-staff-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-staff-add-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.admin-staff-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(76, 175, 80, 0.4);
+}
+
+.admin-staff-add-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Form Card */
+.admin-staff-form-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-staff-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.admin-staff-form-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.admin-staff-form-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: all 0.3s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-staff-form-close-btn:hover {
+  color: #2c3e50;
+  transform: rotate(90deg);
+}
+
+/* Form Grid */
+.admin-staff-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .admin-staff-form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.admin-staff-form-group {
+  animation: fadeIn 0.6s ease backwards;
+}
+
+.admin-staff-form-group:nth-child(1) { animation-delay: 0.2s; }
+.admin-staff-form-group:nth-child(2) { animation-delay: 0.25s; }
+.admin-staff-form-group:nth-child(3) { animation-delay: 0.3s; }
+.admin-staff-form-group:nth-child(4) { animation-delay: 0.35s; }
+.admin-staff-form-group:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.admin-staff-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-staff-input,
+.admin-staff-select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.875rem;
+  background: #f8fbff;
+  color: #333;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.admin-staff-input:hover,
+.admin-staff-select:hover {
+  border-color: #d0d0d0;
+  background: white;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.05);
+}
+
+.admin-staff-input:focus,
+.admin-staff-select:focus {
+  border-color: #4CAF50;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+/* Error Message */
+.admin-staff-error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #c62828;
+  border-radius: 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  border-left: 4px solid #c62828;
+  animation: slideInDown 0.4s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Save Button */
+.admin-staff-save-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 0.875rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-staff-save-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.admin-staff-save-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.admin-staff-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(76, 175, 80, 0.4);
+}
+
+/* Search Card */
+.admin-staff-search-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-staff-search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.875rem;
+  background: #f8fbff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.admin-staff-search-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+.admin-staff-search-icon {
+  color: #999;
+  flex-shrink: 0;
+}
+
+/* Staff Table */
+.admin-staff-table-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+  overflow: hidden;
+}
+
+.admin-staff-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-staff-table thead {
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0f8ff 100%);
+}
+
+.admin-staff-table th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.admin-staff-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.admin-staff-table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.admin-staff-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-staff-table td {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.admin-staff-table td:first-child {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Action Buttons */
+.admin-staff-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-staff-action-btn {
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-staff-action-btn.edit {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.admin-staff-action-btn.edit:hover {
+  background: rgba(76, 175, 80, 0.2);
+  transform: scale(1.05);
+}
+
+.admin-staff-action-btn.delete {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.admin-staff-action-btn.delete:hover {
+  background: rgba(244, 67, 54, 0.2);
+  transform: scale(1.05);
+}
+
+/* Empty State */
+.admin-staff-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-staff-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-staff-add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-staff-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-staff-table-card {
+    padding: 1.5rem;
+  }
+
+  .admin-staff-table th,
+  .admin-staff-table td {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-staff-table-card {
+    padding: 1.25rem;
+  }
+
+  .admin-staff-table th,
+  .admin-staff-table td {
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
+}

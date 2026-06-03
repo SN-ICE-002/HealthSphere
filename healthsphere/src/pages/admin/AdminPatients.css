@@ -1,0 +1,517 @@
+/* Responsive visibility helpers */
+.hidden-small {
+  display: table-cell;
+}
+
+.hidden-medium {
+  display: table-cell;
+}
+
+@media (max-width: 640px) {
+  .hidden-small {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hidden-medium {
+    display: none;
+  }
+}
+
+/* Admin Patients Professional Styling */
+
+.admin-patients-container {
+  animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Header with Add Button */
+.admin-patients-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: slideInDown 0.6s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .admin-patients-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.admin-patients-title-group h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.admin-patients-title-group p {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.admin-patients-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-patients-add-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.admin-patients-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(76, 175, 80, 0.4);
+}
+
+.admin-patients-add-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Form Card */
+.admin-patients-form-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-patients-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.admin-patients-form-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.admin-patients-form-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: all 0.3s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-patients-form-close-btn:hover {
+  color: #2c3e50;
+  transform: rotate(90deg);
+}
+
+/* Form Grid */
+.admin-patients-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .admin-patients-form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.admin-patients-form-group {
+  animation: fadeIn 0.6s ease backwards;
+}
+
+.admin-patients-form-group:nth-child(1) { animation-delay: 0.2s; }
+.admin-patients-form-group:nth-child(2) { animation-delay: 0.25s; }
+.admin-patients-form-group:nth-child(3) { animation-delay: 0.3s; }
+.admin-patients-form-group:nth-child(4) { animation-delay: 0.35s; }
+.admin-patients-form-group:nth-child(5) { animation-delay: 0.4s; }
+.admin-patients-form-group:nth-child(6) { animation-delay: 0.45s; }
+.admin-patients-form-group:nth-child(7) { animation-delay: 0.5s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.admin-patients-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-patients-input,
+.admin-patients-select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.875rem;
+  background: #f8fbff;
+  color: #333;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.admin-patients-input:hover,
+.admin-patients-select:hover {
+  border-color: #d0d0d0;
+  background: white;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.05);
+}
+
+.admin-patients-input:focus,
+.admin-patients-select:focus {
+  border-color: #4CAF50;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+/* Error Message */
+.admin-patients-error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #c62828;
+  border-radius: 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  border-left: 4px solid #c62828;
+  animation: slideInDown 0.4s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Save Button */
+.admin-patients-save-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 0.875rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-patients-save-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.admin-patients-save-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.admin-patients-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(76, 175, 80, 0.4);
+}
+
+/* Search Card */
+.admin-patients-search-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-patients-search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.875rem;
+  background: #f8fbff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.admin-patients-search-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+.admin-patients-search-icon {
+  color: #999;
+  flex-shrink: 0;
+}
+
+/* Patients Table */
+.admin-patients-table-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+  overflow: hidden;
+}
+
+.admin-patients-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-patients-table thead {
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0f8ff 100%);
+}
+
+.admin-patients-table th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.admin-patients-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.admin-patients-table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.admin-patients-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-patients-table td {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.admin-patients-table td:first-child {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Action Buttons */
+.admin-patients-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-patients-action-btn {
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-patients-action-btn.edit {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.admin-patients-action-btn.edit:hover {
+  background: rgba(76, 175, 80, 0.2);
+  transform: scale(1.05);
+}
+
+.admin-patients-action-btn.delete {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.admin-patients-action-btn.delete:hover {
+  background: rgba(244, 67, 54, 0.2);
+  transform: scale(1.05);
+}
+
+.admin-patients-action-btn.reset {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.admin-patients-action-btn.reset:hover {
+  background: rgba(245, 158, 11, 0.2);
+  transform: scale(1.05);
+}
+
+.admin-patients-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  padding: 1rem;
+}
+
+
+/* Empty State */
+.admin-patients-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-patients-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-patients-add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-patients-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-patients-table-card {
+    padding: 1.5rem;
+  }
+
+  .admin-patients-table th,
+  .admin-patients-table td {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-patients-table-card {
+    padding: 1.25rem;
+  }
+
+  .admin-patients-table th,
+  .admin-patients-table td {
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
+}
