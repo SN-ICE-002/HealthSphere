@@ -4,18 +4,21 @@ const jwt = require('jsonwebtoken');
 
 exports.login = async (req, res) => {
   const { email, password, role } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
+  const normalizedRole = role?.trim().toLowerCase();
 
   // Requirement 7: Input Validation
-  if (!email || !password || !role) {
+  if (!normalizedEmail || !password || !normalizedRole) {
     return res.status(400).json({ message: 'Please provide email, password, and role.' });
   }
 
   try {
     // 1. Find user by email and role
-    const query = 'SELECT * FROM users WHERE email = $1 AND role = $2';
-    const result = await db.query(query, [email, role]);
+    const query = 'SELECT * FROM users WHERE LOWER(email) = $1 AND LOWER(role) = $2';
+    const result = await db.query(query, [normalizedEmail, normalizedRole]);
 
     if (result.rows.length === 0) {
+      console.log(`Login failed: No user found for ${normalizedEmail} with role ${normalizedRole}`);
       return res.status(401).json({ message: 'Invalid credentials or incorrect role.' });
     }
 
@@ -60,16 +63,18 @@ exports.register = async (req, res) => {
   const { name, fullName, email, password, phone, address, dob, gender, bloodType, emergencyContactName, emergencyContactNumber, allergies, medicalHistory } = req.body;
   const finalName = name || fullName;
 
+  const normalizedEmail = email?.trim().toLowerCase();
+  
   console.log('Backend received register request:', req.body);
 
-  if (!email || !password || !finalName) {
+  if (!normalizedEmail || !password || !finalName) {
     return res.status(400).json({ message: 'Name, email, and password are required.' });
   }
 
   try {
     // 1. Check if user already exists
-    const checkQuery = 'SELECT * FROM users WHERE email = $1';
-    const checkResult = await db.query(checkQuery, [email]);
+    const checkQuery = 'SELECT * FROM users WHERE LOWER(email) = $1';
+    const checkResult = await db.query(checkQuery, [normalizedEmail]);
     
     if (checkResult.rows.length > 0) {
       return res.status(400).json({ message: 'User with this email already exists.' });
@@ -80,13 +85,13 @@ exports.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
+    const username = normalizedEmail.split('@')[0] + Math.floor(Math.random() * 1000);
     const insertUserQuery = `
       INSERT INTO users (username, password_hash, role, full_name, email)
       VALUES ($1, $2, 'patient', $3, $4)
       RETURNING id, username, role, email, full_name;
     `;
-    const userResult = await db.query(insertUserQuery, [username, hashedPassword, finalName, email]);
+    const userResult = await db.query(insertUserQuery, [username, hashedPassword, finalName, normalizedEmail]);
     const newUser = userResult.rows[0];
 
     // 3. Insert into patients table

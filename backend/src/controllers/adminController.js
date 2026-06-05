@@ -36,20 +36,24 @@ exports.createPatient = async (req, res) => {
   }
 
   try {
-    // Check for duplicate email
-    const checkResult = await db.query('SELECT id FROM users WHERE email = $1', [email]);
+    const normalizedEmail = email.trim().toLowerCase();
+    const checkResult = await db.query('SELECT id FROM users WHERE LOWER(email) = $1', [normalizedEmail]);
     if (checkResult.rows.length > 0) {
       return res.status(400).json({ message: 'A user with this email already exists.' });
     }
 
-    const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
-    const passwordToStore = password || 'patient123'; // default password if not provided
+    const username = normalizedEmail.split('@')[0] + Math.floor(Math.random() * 1000);
+    const passwordToStore = password || 'patient123'; 
+    
+    // Hash the password so they can actually log in
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(passwordToStore, salt);
 
     const userResult = await db.query(
       `INSERT INTO users (username, password_hash, role, full_name, email)
        VALUES ($1, $2, 'patient', $3, $4)
        RETURNING id, full_name AS name, email`,
-      [username, passwordToStore, finalName, email]
+      [username, hashedPassword, finalName, normalizedEmail]
     );
     const newUser = userResult.rows[0];
 
@@ -133,20 +137,24 @@ exports.createStaff = async (req, res) => {
   }
 
   try {
-    // Check for duplicate email
-    const checkResult = await db.query('SELECT id FROM users WHERE email = $1', [email]);
+    const normalizedEmail = email.trim().toLowerCase();
+    const checkResult = await db.query('SELECT id FROM users WHERE LOWER(email) = $1', [normalizedEmail]);
     if (checkResult.rows.length > 0) {
       return res.status(400).json({ message: 'A user with this email already exists.' });
     }
 
-    const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
+    const username = normalizedEmail.split('@')[0] + Math.floor(Math.random() * 1000);
     const passwordToStore = password || 'staff123';
+
+    // Hash the password so they can log in
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(passwordToStore, salt);
 
     const result = await db.query(
       `INSERT INTO users (username, password_hash, role, full_name, email, phone, specialty)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING id, full_name AS name, email, role, phone, specialty, created_at AS "createdAt"`,
-      [username, passwordToStore, role, finalName, email, phone || null, specialty || null]
+      [username, hashedPassword, role, finalName, normalizedEmail, phone || null, specialty || null]
     );
 
     res.status(201).json({

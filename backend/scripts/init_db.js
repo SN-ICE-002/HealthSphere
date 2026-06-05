@@ -4,15 +4,19 @@ const createTables = async () => {
   const queryText = `
     -- Drop tables if you want a fresh start
     DROP VIEW IF EXISTS staff CASCADE;
-    DROP TABLE IF EXISTS appointments, doctor_notes, prescriptions, allergies, medical_history, patients, users, roles, role_permissions, permissions, help_desk_requests CASCADE;
+    DROP TABLE IF EXISTS appointments, doctor_notes, prescriptions, allergies, medical_history, patients, users, roles, help_desk_requests CASCADE;
 
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       username VARCHAR(50) UNIQUE NOT NULL,
       password_hash VARCHAR(255) NOT NULL,
-      role VARCHAR(20) NOT NULL CHECK (role IN ('patient', 'doctor', 'admin')),
+      role VARCHAR(20) NOT NULL CHECK (role IN ('patient', 'doctor', 'admin', 'nurse')),
       full_name VARCHAR(100) NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
+      phone VARCHAR(20),
+      specialty VARCHAR(100),
+      reset_code VARCHAR(10),
+      reset_code_expires TIMESTAMP,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -21,6 +25,8 @@ const createTables = async () => {
       date_of_birth DATE,
       contact_number VARCHAR(20),
       blood_type VARCHAR(5),
+      address TEXT,
+      gender VARCHAR(20),
       emergency_contact_name VARCHAR(100),
       emergency_contact_number VARCHAR(20)
     );
@@ -64,10 +70,22 @@ const createTables = async () => {
       patient_id INTEGER REFERENCES patients(user_id) ON DELETE CASCADE,
       doctor_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
       appointment_date TIMESTAMP NOT NULL,
+      reason VARCHAR(255),
       status VARCHAR(20) DEFAULT 'scheduled' CHECK (status IN ('scheduled', 'completed', 'cancelled', 'no_show'))
     );
 
-    -- Role-based access control tables
+    CREATE TABLE IF NOT EXISTS help_desk_requests (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+      email VARCHAR(100) NOT NULL,
+      subject VARCHAR(255),
+      message TEXT NOT NULL,
+      admin_response TEXT,
+      status VARCHAR(20) DEFAULT 'pending',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    -- Role-based access control table
     CREATE TABLE IF NOT EXISTS roles (
       role_id SERIAL PRIMARY KEY,
       role_name VARCHAR(50) UNIQUE NOT NULL

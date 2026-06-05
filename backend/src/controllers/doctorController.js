@@ -54,7 +54,7 @@ exports.getPatients = async (req, res) => {
 
   try {
     const result = await db.query(`
-      SELECT DISTINCT
+      SELECT 
         u.id, u.full_name AS name, u.email,
         p.contact_number AS phone,
         p.date_of_birth AS dob,
@@ -62,12 +62,10 @@ exports.getPatients = async (req, res) => {
         p.emergency_contact_name AS "emergencyContactName",
         COALESCE((SELECT array_agg(allergy_name) FROM allergies WHERE patient_id = u.id), ARRAY[]::VARCHAR[]) AS allergies,
         COALESCE((SELECT array_agg(condition) FROM medical_history WHERE patient_id = u.id), ARRAY[]::VARCHAR[]) AS "medicalHistory"
-      FROM appointments a
-      JOIN patients p ON a.patient_id = p.user_id
+      FROM patients p
       JOIN users u ON p.user_id = u.id
-      WHERE a.doctor_id = $1
       ORDER BY u.full_name ASC
-    `, [doctorId]);
+    `);
 
     res.json(result.rows);
   } catch (error) {
