@@ -169,16 +169,16 @@ npm run db:seed    # Seeds the database with test data
 
 ## 🚀 Quick Start (Development)
 
-```bash
-# 1. Install all dependencies
-npm run install:all
+## start the front-end
 
-# 2. Set up the database (ensure PostgreSQL is running)
-npm run db:init
-npm run db:seed
+-- CD healthsphere/
 
-# 3. Run frontend and backend concurrently
-npm run dev
-```
+-- npm start
+
+## start the back-end
+
+--CD backend/
+
+-- npm start
 
 > Frontend runs on `http://localhost:3000` | Backend API on `http://localhost:5000`
